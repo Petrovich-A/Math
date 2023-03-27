@@ -8,14 +8,14 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-class MathTest {
-    private final static Math MATH = new Math();
+class MathCustomTest {
+    private final static MathCustom MATH_CUSTOM = new MathCustom();
 
     @ParameterizedTest(name = "{index} ==> {1} + {2} = expected: {0}")
     @MethodSource("intProviderForSum")
     @DisplayName("Test: sum")
     void sum(int expected, int a, int b) {
-        Assertions.assertEquals(expected, MATH.sum(a, b));
+        Assertions.assertEquals(expected, MATH_CUSTOM.sum(a, b));
     }
 
 
@@ -23,7 +23,13 @@ class MathTest {
     @MethodSource("intProviderForMax")
     @DisplayName("Test: max")
     void max(int expected, int a, int b) {
-        Assertions.assertEquals(expected, MATH.max(a, b));
+        Assertions.assertEquals(expected, MATH_CUSTOM.max(a, b));
+    }
+
+    @ParameterizedTest(name = "{index} ==> avg of {1} = expected: {0}")
+    @MethodSource("intProviderForAvg")
+    @DisplayName("Test: avg")
+    void avg(double expected, int[] array) {
     }
 
     public static Stream<Arguments> intProviderForSum() {
@@ -36,6 +42,11 @@ class MathTest {
         return Stream.of(Arguments.arguments(48, 3, 48),
                 Arguments.arguments(94, 94, 2),
                 Arguments.arguments(-5, -5, -10),
-                Arguments.arguments(1, Integer.MAX_VALUE+1, 1));
+                Arguments.arguments(1, Integer.MAX_VALUE + 1, 1));
+    }
+
+    public static Stream<Arguments> intProviderForAvg() {
+        return Stream.of(Arguments.arguments(2, new int[]{1, 2, 3}),
+                Arguments.arguments(22.33, new int[]{3, 16, 48}));
     }
 }
