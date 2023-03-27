@@ -30,6 +30,7 @@ class MathCustomTest {
     @MethodSource("intProviderForAvg")
     @DisplayName("Test: avg")
     void avg(double expected, int[] array) {
+        Assertions.assertEquals(expected, MATH_CUSTOM.avg(array));
     }
 
     public static Stream<Arguments> intProviderForSum() {
@@ -47,6 +48,8 @@ class MathCustomTest {
 
     public static Stream<Arguments> intProviderForAvg() {
         return Stream.of(Arguments.arguments(2, new int[]{1, 2, 3}),
-                Arguments.arguments(22.33, new int[]{3, 16, 48}));
+                Arguments.arguments(22.33, new int[]{3, 16, 48}),
+                Arguments.arguments(3, new int[]{8, -4, 5}),
+                Arguments.arguments(0, new int[]{}));
     }
 }
