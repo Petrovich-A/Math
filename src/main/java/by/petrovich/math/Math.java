@@ -1,4 +1,4 @@
-package java.by.petrovich.math;
+package by.petrovich.math;
 
 public class Math {
     public int sum(int a, int b) {
