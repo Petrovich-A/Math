@@ -1,8 +1,11 @@
 package by.petrovich.math;
 
-import java.text.DecimalFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MathCustom {
+    private final static  int DECIMAL_PLACES = 2;
+
     public int sum(int a, int b) {
         return ((long) a + b > Integer.MAX_VALUE) ? -1 : a + b;
     }
@@ -17,9 +20,16 @@ public class MathCustom {
             for (int i : array) {
                 sum += i;
             }
-            return Math.round((sum / array.length) * 100.0) / 100.0;
+            return round(sum / array.length);
         }
         return 0;
+    }
+
+    public static double round(double value) {
+        if (DECIMAL_PLACES < 0) throw new IllegalArgumentException();
+        BigDecimal bigDecimal = BigDecimal.valueOf(value);
+        bigDecimal = bigDecimal.setScale(DECIMAL_PLACES, RoundingMode.HALF_UP);
+        return bigDecimal.doubleValue();
     }
 
 }
