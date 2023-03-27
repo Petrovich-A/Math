@@ -2,6 +2,7 @@ package by.petrovich.math;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,6 +34,13 @@ class MathCustomTest {
         Assertions.assertEquals(expected, MATH_CUSTOM.avg(array));
     }
 
+    @ParameterizedTest(name = "{index} ==> max number of {1} = expected: {0}")
+    @MethodSource("intProviderForMaxNumber")
+    @DisplayName("Test: avg")
+    void maxNumber(int expected, int[] array) {
+        Assertions.assertEquals(expected, MATH_CUSTOM.maxNumber(array));
+    }
+
     public static Stream<Arguments> intProviderForSum() {
         return Stream.of(Arguments.arguments(59, 45, 14),
                 Arguments.arguments(5, -5, 10),
@@ -50,6 +58,13 @@ class MathCustomTest {
         return Stream.of(Arguments.arguments(2, new int[]{1, 2, 3}),
                 Arguments.arguments(22.33, new int[]{3, 16, 48}),
                 Arguments.arguments(3, new int[]{8, -4, 5}),
+                Arguments.arguments(0, new int[]{}));
+    }
+
+    public static Stream<Arguments> intProviderForMaxNumber() {
+        return Stream.of(Arguments.arguments(3, new int[]{1, 2, 3}),
+                Arguments.arguments(47, new int[]{47, 16, 4}),
+                Arguments.arguments(8, new int[]{8, -4, 5}),
                 Arguments.arguments(0, new int[]{}));
     }
 }
