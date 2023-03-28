@@ -2,7 +2,6 @@ package by.petrovich.math;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,9 +35,16 @@ class MathCustomTest {
 
     @ParameterizedTest(name = "{index} ==> max number of {1} = expected: {0}")
     @MethodSource("intProviderForMaxNumber")
-    @DisplayName("Test: avg")
+    @DisplayName("Test: maxNumber")
     void maxNumber(int expected, int[] array) {
         Assertions.assertEquals(expected, MATH_CUSTOM.maxNumber(array));
+    }
+
+    @ParameterizedTest(name = "{index} ==> hypotenuse of {1}^2 + {2}^2 = expected: {0}")
+    @MethodSource("intProviderForCalculateHypotenuse")
+    @DisplayName("Test: calculateHypotenuse")
+    void intProviderForCalculateHypotenuse(double expected, double a, double b) {
+        Assertions.assertEquals(expected, MATH_CUSTOM.calculateHypotenuse(a, b));
     }
 
     public static Stream<Arguments> intProviderForSum() {
@@ -64,7 +70,13 @@ class MathCustomTest {
     public static Stream<Arguments> intProviderForMaxNumber() {
         return Stream.of(Arguments.arguments(3, new int[]{1, 2, 3}),
                 Arguments.arguments(47, new int[]{47, 16, 4}),
-                Arguments.arguments(8, new int[]{8, -4, 5}),
+                Arguments.arguments(16, new int[]{8, -4, 5, 16}),
                 Arguments.arguments(0, new int[]{}));
+    }
+
+    public static Stream<Arguments> intProviderForCalculateHypotenuse() {
+        return Stream.of(Arguments.arguments(3.61, 2, 3),
+                Arguments.arguments(7.3, 4.38, 5.84),
+                Arguments.arguments(1.43, 0.89, 1.12));
     }
 }

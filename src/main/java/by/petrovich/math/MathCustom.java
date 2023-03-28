@@ -27,7 +27,7 @@ public class MathCustom {
 
     public int maxNumber(int[] array) {
         int maxNumber = 0;
-        if (array!=null && array.length > 0) {
+        if (array != null && array.length > 0) {
             maxNumber = array[0];
             for (int i = 1; i < array.length; i++) {
                 if (maxNumber <= array[i]) {
@@ -36,6 +36,10 @@ public class MathCustom {
             }
         }
         return maxNumber;
+    }
+
+    public double calculateHypotenuse(double cathetusA, double cathetusB) {
+        return round(Math.sqrt(cathetusA * cathetusA + cathetusB * cathetusB));
     }
 
     private static double round(double value) {
